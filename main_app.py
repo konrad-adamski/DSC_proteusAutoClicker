@@ -54,7 +54,11 @@ class Application(tk.Tk):
     def open_directory(self):
         if self.directory_path.get():
             os.startfile(self.directory_path.get())
-            clicker = AutoClicker(self.factor.get(), self.is_demo.get())
+
+            # Dateianzahl im Verzeichnis ermitteln
+            files_numb = file_count(self.directory_path.get())
+
+            clicker = AutoClicker(files_numb, self.factor.get(), self.is_demo.get())
             self.start_button.config(state="disabled")
 
             # Start the AutoClicker in a separate thread

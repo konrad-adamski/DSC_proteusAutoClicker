@@ -4,9 +4,10 @@ import pyautogui
 
 
 class AutoClicker:
-    def __init__(self, delay_factor=1.0, demo=False):
+    def __init__(self, files_numb, delay_factor=1.0, demo=False):
         self.is_running = True  # Zustand, der angibt, ob der AutoClicker läuft
 
+        self.files_numb = files_numb
         self.delay_factor = delay_factor
         self.demo = demo
 
@@ -22,10 +23,20 @@ class AutoClicker:
         time.sleep(self.sleep)  # Warten, um Fehler zu vermeiden
 
     def start(self):
+        pyautogui.press('down')
+        pyautogui.press('up')
+
+        for i in range(self.files_numb):
+            self.start_single()
+            time.sleep(0.5)
+            pyautogui.press('down')
+            time.sleep(self.sleep)
+
+    def start_single(self):
         # Auswahl aller Dateien im Ordner
-        pyautogui.hotkey('ctrl', 'a')
-        time.sleep(self.sleep)
-        print("Dateien ausgewählt")
+        #pyautogui.hotkey('ctrl', 'a')
+        #time.sleep(self.sleep)
+        #print("Dateien ausgewählt")
 
         # Start von Proteus
         pyautogui.press('enter')
